@@ -1,0 +1,35 @@
+# Network Firewall
+Protecting resources in VPCs. Rules engine provides fine grained control over traffic in and out of the VPC. Firewall endpoint is a type of VPC endpoint.
+
+- It uses a VPC Endpoint and Gateway load balancer.
+- Stateful and stateless firewall
+- Intrusion Prevention System (IPS)
+- Web Filtering
+- Works with AWS Network Firewall Manager for centrally applying policies across VPCs/accounts.
+- Do not deploy resources in the firewall subnet.
+- Deep packet inspection with decryption/re-encryption in conjunection with ACM.
+
+Firewall Endpoint in Firewall subnet->Firewall Policy inside the VPC. Filtering is done at the VPC level (not subnet/instance like a NACL/SG)
+
+
+# DNS Firewall (may not be on the exam yet)
+
+- Filter and regulate outbound DNS traffic for VPCs.
+- Requests route through R53 resolver for DNS
+- Helps prevent DNS exfiltration of data.
+- Monitor and control which domains can be queried.
+- Can integrate with AWS Firewall Manager
+- Can span VPCs and Accounts.
+
+# AWS Firewall Manager
+
+Manage rules in all accounts of an AWS Org. Security policy: common set of security rules. Rules are applied to new resources as they are created (compliance 👍) and all future accounts in your Org.
+
+- WAF Rules (ALB, API GW, CloudFront)
+- AWS Shield Advanced (ALB, CLB, NLB, ElasticIP, CloudFront)
+- Security Groups for EC2, ALB, ENI resources.
+- AWS Network Firewall (VPC Level)
+- AWS Route 53 Resolver DNS Firewall
+- Policies are created at the region level.
+
+

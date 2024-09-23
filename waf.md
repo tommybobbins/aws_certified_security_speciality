@@ -20,6 +20,8 @@ Destinations for AWS WAF logs:
 
 ## WAF RULES
 
+Baseline Rule Groups/ Use case specific Rule Groups
+
 - Geo match
 - IP set match
 - Regex pattern set
@@ -27,6 +29,28 @@ Destinations for AWS WAF logs:
 - SQLi attack
 - String match
 - XSS scripting.
+
+### Baseline Rule Groups
+
+- AWSManagedRulesCommonRuleSet
+- AWSManagedRulesAdminProtectionRuleSet
+
+### Use-case specific Rule Groups
+
+- AWSManagedRulesSQLiRuleSet
+- AWSManagedRulesWindowsRuleSet
+- AWSManagedRulesPHPRuleSet
+- AWSManagedRulesWordPressRuleSet
+
+### IP Reputation Rule Groups
+
+- AWSManagedRulesAmazonIPReputationList
+- AWSManagedRulesAnonymousIPList
+
+### BotContralManagedRuleGroup
+
+- AWSManagedRulesBotControlRuleSet
+
 
 ## Rule Actions
 
