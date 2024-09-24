@@ -76,22 +76,4 @@ Identifies the source of the key material in the KMS Key and cannot be changed a
 
 - Same Key material and same key ID in both regions.
 - Encrypt in one region and decrypt in other regions.
-- Multi-Region keys have the same key id, key material, automatic rotation etc.
-- KMS Multi-Region are not global (Primary + Replicas).
-
-Use Cases: Global client-side encryption, encryption on Global DynamoDB, Global Aurora.
-
-## KMS and Envelope encryption
-
-KMS Encrypt API has a limit of 4KB. If you want to encrypt more than 4KB, then use envelope encryption.
-API Used will be GenerateDataKey API == Envelope encryption.
-
-Data Key Caching - reuse data keys instead of creating one each time.
-
-## KMS Symmetric
-
-- *Encrypt* - encrypt up to 4KB of data through KMS.
-- *GenerateDataKey* - generates a unique symmetric data key. Returns a plaintext copy of the data key and a copy that is encrypted under the CMK that you specify.
-- *GenerateDataKeyWithoutPlaintext* - Generate a DEK to use at some point (not immediately). DEK that is encrypted under the CMK that specify. Must decrypt it before you can use it.
-- *Decrypt* - decrypt up to 4KB of data.
-- *GenerateRandom* - returns a random byte string.
+- No need to make cross region API calls
