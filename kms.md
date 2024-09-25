@@ -95,3 +95,33 @@ Data Key Caching - reuse data keys instead of creating one each time.
 - *GenerateDataKeyWithoutPlaintext* - Generate a DEK to use at some point (not immediately). DEK that is encrypted under the CMK that specify. Must decrypt it before you can use it.
 - *Decrypt* - decrypt up to 4KB of data.
 - *GenerateRandom* - returns a random byte string.
+
+## KMS Key Deletion - CloudWatch Alarm
+
+- Use CloudTrail, CloudWatch Logs, CloudWatch Alarms and SNS to be notified when someone tries to use a CMK that's pending deletion in a cryptographic operation (Encrypt, Decrypt).
+- To be notified of keys being deleted or disabled, use cloudtrail and eventbridge.
+
+````
+User-> *DisableKey* or *ScheduleKeyDeletion* API calls -> AWS KMS -> event -> Eventbridge -> trigger -> SNS -> SendEmail -> Admin
+                                                                                          -> initiate --------->SSM
+                                                            <------- AWSConfigRemediation-CancelKeyOperation<--<SSM
+````
+
+
+## KMS Grants 
+
+- Allow you to grant access to specific AWS KMS keys to other AWS accounts and IAM Users/Roles within your AWS Account.
+- Often used for temporary permissions.
+- Can be used for all operations including encrypt, decrypt, sign and verify as well as creating more grants.
+- Grants are for one KMS key only and one or more IAM Principals.
+- Once granted, a principal can perform any operation as specified in the Grant.
+- Grants do not expire automatically, you must delete them manually.
+- You don't need to change KMS Key Policy or IAM Policy.
+
+## Condition Keys
+
+- *kms:ViaService* - limits the use of a KMS key to requests from specified AWS Services.
+- Condition->StringEquals->kms:ViaService->rds.us-west-2.amazonaws.com
+- Can be used with aws/ebs aws/rds - you will find this in the policies.
+- *kms:CallerAccount* - kms:CallerAccount
+- Condition->StringEquals->kms:CallerAccount->"0123456789"
