@@ -125,3 +125,26 @@ User-> *DisableKey* or *ScheduleKeyDeletion* API calls -> AWS KMS -> event -> Ev
 - Can be used with aws/ebs aws/rds - you will find this in the policies.
 - *kms:CallerAccount* - kms:CallerAccount
 - Condition->StringEquals->kms:CallerAccount->"0123456789"
+
+## Immediately delete CMK key
+
+You can delete the imported key material from a KMS key at any time. Also, when imported key material with an expiration date expires, AWS KMS deletes the key material. In either case, AWS KMS deletes the key material immediately, the key state of the KMS key changes to pending import, and the KMS key can't be used in any cryptographic operations. 
+
+Implement the KMS import key function to perform an immediate delete operation.
+
+https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+
+
+## Key Policy
+
+This Key policy allows any principal in the 111122223333 AWS account to manage the KMS key access through IAM policies. It does not grant full access to the KMS key, only to control access to the key.
+
+````
+{
+ "Sid": "Enable IAM User Permissions",
+ "Effect": "Allow",
+ "Principal": {"AWS": "arn:aws:iam::111122223333:root"},
+ "Action": "kms:*",
+ "Resource": "*"
+}
+````
